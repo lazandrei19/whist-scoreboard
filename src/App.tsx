@@ -87,10 +87,10 @@ const App: React.FC = () => {
               key={name}
               onDelete={() => onDelete(name)}
               onChange={(newName) => changePlayerName(name, newName)}
-              width={players.length === 8 ? 98 / 8 : 90 / players.length}
+              width={players.length === 6 ? 98 / 6 : 90 / players.length}
             />
           ))}
-          {players.length < 8 && (
+          {players.length < 6 && (
             <th
               id="add"
               onClick={addPlayer}
@@ -154,7 +154,7 @@ const App: React.FC = () => {
                 </td>
               </>
             ))}
-            {players.length < 8 && <td />}
+            {players.length < 6 && <td />}
           </tr>
         ))}
       </tbody>
