@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import NumericalInput from "./components/NumericalInput";
 import PlayerName from "./components/PlayerName";
@@ -87,6 +81,16 @@ const App: React.FC = () => {
               key={name}
               onDelete={() => onDelete(name)}
               onChange={(newName) => changePlayerName(name, newName)}
+              onMove={(direction: "left" | "right") => {
+                const index = players.findIndex((p) => p === name);
+                const _players = players.filter((p) => p !== name);
+                if (direction === "right") {
+                  _players.splice(index + 1, 0, name);
+                } else if (index > 0) {
+                  _players.splice(index - 1, 0, name);
+                }
+                setPlayers(_players);
+              }}
               width={players.length === 6 ? 98 / 6 : 90 / players.length}
             />
           ))}

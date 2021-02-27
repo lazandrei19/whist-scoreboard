@@ -4,6 +4,7 @@ interface OwnProps {
   initialName: string;
   onDelete: () => void;
   onChange: (newName: string) => boolean;
+  onMove: (direction: "left" | "right") => void;
   width: number;
 }
 
@@ -11,6 +12,7 @@ const PlayerName: React.FC<OwnProps> = ({
   initialName,
   onDelete,
   onChange,
+  onMove,
   width,
 }) => {
   const [editing, setEditing] = useState(false);
@@ -27,11 +29,39 @@ const PlayerName: React.FC<OwnProps> = ({
         width: `${width}%`,
       }}
     >
-      {editing ? (
-        <input value={name} onChange={(ev) => setName(ev.target.value)} />
-      ) : (
-        <span className="playerName">{name}</span>
-      )}
+      <div
+        style={{
+          width: "100%",
+        }}
+      >
+        <span
+          style={{
+            marginRight: "25px",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            onMove("left");
+          }}
+        >
+          &lt;
+        </span>
+        {editing ? (
+          <input value={name} onChange={(ev) => setName(ev.target.value)} />
+        ) : (
+          <span className="playerName">{name}</span>
+        )}
+        <span
+          style={{
+            marginLeft: "25px",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            onMove("right");
+          }}
+        >
+          &gt;
+        </span>
+      </div>
       <div className="controls">
         {editing ? (
           <>
